@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestellung | DC Server</title>
+    <style>
+        body { background-color: #0d0d0d; color: #fff; text-align: center; font-family: Arial, sans-serif; padding: 50px 20px; }
+        #bestellformular { background: #1a1a1a; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px; margin: auto; box-shadow: 0 4px 10px rgba(255, 94, 0, 0.5); }
+        input, select { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 5px; font-size: 1rem; }
+        button { width: 100%; padding: 12px; margin-top: 15px; background: #ff5e00; border: none; color: white; font-size: 1.2rem; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #ff9500; }
+        .discord { margin-top: 20px; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <h1>Bestelle deinen DC Server</h1>
+    <p>Fülle das Formular aus, um deine Bestellung abzuschließen.</p>
+    
+    <form id="bestellformular">
+        <select id="serverpaket">
+            <option value="basic">Basic Server - 9,99€</option>
+            <option value="pro">Pro Server - 19,99€</option>
+            <option value="ultimate">Ultimate Server - 29,99€</option>
+        </select>
+        <input type="text" id="name" placeholder="Dein Name" required>
+        <input type="email" id="email" placeholder="Deine E-Mail" required>
+        <button type="submit">Bestellen</button>
+    </form>
+
+    <p class="discord">Oder kontaktiere mich direkt auf Discord: <b>maxify666</b></p>
+
+    <script>
+        document.getElementById("bestellformular").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let paket = document.getElementById("serverpaket").value;
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+
+            let mailtoLink = `mailto:maxschueller11@gmail.com?subject=Bestellung%20DC%20Server&body=Name:%20${name}%0AEmail:%20${email}%0APaket:%20${paket}`;
+            
+            window.location.href = mailtoLink;
+
+            alert("Danke für deine Bestellung! Falls dein E-Mail-Programm nicht automatisch geöffnet wurde, schreib mir auf Discord: maxify666.");
+            this.reset();
+        });
+
+        // Automatische Vorauswahl des Pakets basierend auf der URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const paket = urlParams.get("paket");
+        if (paket) {
+            document.getElementById("serverpaket").value = paket;
+        }
+    </script>
+</body>
+</html>
